@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IP Network Calculator</title>
+<style>
+    body {
+        background:#0f172a;
+        color:#e5e7eb;
+        font-family: system-ui, sans-serif;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+    }
+    .card {
+        background:#020617;
+        padding:24px;
+        border-radius:12px;
+        width:380px;
+        box-shadow:0 0 40px rgba(0,0,0,.6);
+    }
+    h2 {
+        margin:0 0 16px;
+        text-align:center;
+    }
+    input {
+        width:100%;
+        padding:10px;
+        border-radius:6px;
+        border:none;
+        margin-bottom:12px;
+        font-size:14px;
+    }
+    button {
+        width:100%;
+        padding:10px;
+        background:#2563eb;
+        color:white;
+        border:none;
+        border-radius:6px;
+        font-size:15px;
+        cursor:pointer;
+    }
+    button:hover {
+        background:#1d4ed8;
+    }
+    pre {
+        margin-top:16px;
+        background:#020617;
+        padding:12px;
+        border-radius:6px;
+        line-height:1.6;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h2>IP Network Calculator</h2>
+    <input id="ip" placeholder="Example: 192.168.1.0/24">
+    <button onclick="calc()">Calculate</button>
+    <pre id="out"></pre>
+</div>
+
+<script>
+function ipToInt(ip) {
+    return ip.split('.').reduce((a,b)=> (a<<8)+(+b),0) >>> 0;
+}
+function intToIp(int) {
+    return [(int>>>24)&255,(int>>>16)&255,(int>>>8)&255,int&255].join('.');
+}
+
+function calc() {
+    try {
+        const input = document.getElementById("ip").value;
+        const [ip, cidr] = input.split("/");
+        const mask = cidr ? parseInt(cidr) : 32;
+
+        const ipInt = ipToInt(ip);
+        const netmask = mask === 0 ? 0 : (~((1 << (32-mask)) - 1)) >>> 0;
+
+        const network = ipInt & netmask;
+        const broadcast = network | (~netmask >>> 0);
+
+        const first = mask >= 31 ? "N/A" : intToIp(network + 1);
+        const last  = mask >= 31 ? "N/A" : intToIp(broadcast - 1);
+        const hosts = mask >= 31 ? 0 : Math.pow(2, 32-mask) - 2;
+
+        document.getElementById("out").textContent =
+            "Network Address : " + intToIp(network) + "\n" +
+            "Broadcast Addr  : " + intToIp(broadcast) + "\n" +
+            "First Host      : " + first + "\n" +
+            "Last Host       : " + last + "\n" +
+            "Host Range      : " + hosts;
+    } catch {
+        document.getElementById("out").textContent = "Invalid input";
+    }
+}
+</script>
+
+</body>
+</html>
