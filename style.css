@@ -1,0 +1,277 @@
+/* --------------------------------------------------
+   GLOBAL STRUCTURE (shared by all themes)
+-------------------------------------------------- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Courier New", monospace;
+  overflow-x: hidden;
+}
+
+.wrapper {
+  width: 90%;
+  margin: auto;
+  padding-top: 40px;
+}
+
+.header {
+  font-size: 34px;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: bold;
+  animation: flicker 2s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .85; }
+}
+
+/* Input + Button */
+.input-box {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+input {
+  width: 360px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 4px;
+  outline: none;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.panel-container {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.panel {
+  flex: 1;
+  padding: 20px;
+  border-radius: 6px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.panel.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.panel-title {
+  font-size: 18px;
+  margin-bottom: 14px;
+  font-weight: bold;
+  padding-bottom: 6px;
+  border-bottom: 1px solid;
+}
+
+pre {
+  padding: 15px;
+  border-radius: 4px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+/* Theme Selector */
+.theme-box {
+  width: 90%;
+  margin: 60px auto 30px auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+select {
+  padding: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+/* Scanlines (applies to all themes) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.04) 0,
+    rgba(255,255,255,0.04) 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+  mix-blend-mode: overlay;
+  z-index: 50;
+}
+
+
+/* --------------------------------------------------
+   THEME: GREEN MATRIX  (DEFAULT)
+-------------------------------------------------- */
+
+body.theme-green {
+  background: #000;
+  color: #00ff88;
+}
+
+body.theme-green * {
+  text-shadow: 0 0 6px #00ff88;
+}
+
+body.theme-green input {
+  background: #001500;
+  border: 2px solid #00ff88;
+  color: #00ff88;
+  box-shadow: 0 0 10px #00ff88;
+}
+
+body.theme-green button {
+  background: #003300;
+  border: 2px solid #00ff88;
+  color: #00ff88;
+  box-shadow: 0 0 10px #00ff88;
+}
+
+body.theme-green button:hover {
+  background: #005500;
+}
+
+body.theme-green .panel {
+  background: #000900;
+  border: 2px solid #00ff88;
+  box-shadow: 0 0 15px #00ff88;
+}
+
+body.theme-green pre {
+  background: #000700;
+  border: 1px solid #00ff88;
+  box-shadow: inset 0 0 12px #00ff88;
+}
+
+body.theme-green select {
+  background: #000;
+  color: #00ff88;
+  border: 2px solid #00ff88;
+  box-shadow: 0 0 10px #00ff88;
+}
+
+
+/* --------------------------------------------------
+   THEME: BLUE CYBER
+-------------------------------------------------- */
+
+body.theme-blue {
+  background: #020b1a;
+  color: #33aaff;
+}
+
+body.theme-blue * {
+  text-shadow: 0 0 6px #33aaff;
+}
+
+body.theme-blue input {
+  background: #001020;
+  border: 2px solid #33aaff;
+  color: #33aaff;
+  box-shadow: 0 0 10px #33aaff;
+}
+
+body.theme-blue button {
+  background: #00264d;
+  border: 2px solid #33aaff;
+  color: #33aaff;
+  box-shadow: 0 0 12px #33aaff;
+}
+
+body.theme-blue button:hover {
+  background: #003b73;
+}
+
+body.theme-blue .panel {
+  background: #00101f;
+  border: 2px solid #33aaff;
+  box-shadow: 0 0 16px #33aaff;
+}
+
+body.theme-blue pre {
+  background: #000814;
+  border: 1px solid #33aaff;
+  box-shadow: inset 0 0 12px #33aaff;
+}
+
+body.theme-blue select {
+  background: #000a18;
+  border: 2px solid #33aaff;
+  color: #33aaff;
+  box-shadow: 0 0 13px #33aaff;
+}
+
+
+/* --------------------------------------------------
+   THEME: PURPLE PECTRAL
+-------------------------------------------------- */
+
+body.theme-purple {
+  background: #0b0014;
+  color: #bb44ff;
+}
+
+body.theme-purple * {
+  text-shadow: 0 0 8px #bb44ff;
+}
+
+body.theme-purple input {
+  background: #150020;
+  border: 2px solid #bb44ff;
+  color: #bb44ff;
+  box-shadow: 0 0 12px #bb44ff;
+}
+
+body.theme-purple button {
+  background: #240033;
+  border: 2px solid #bb44ff;
+  color: #bb44ff;
+  box-shadow: 0 0 14px #bb44ff;
+}
+
+body.theme-purple button:hover {
+  background: #3a0055;
+}
+
+body.theme-purple .panel {
+  background: #0d001a;
+  border: 2px solid #bb44ff;
+  box-shadow: 0 0 16px #bb44ff;
+}
+
+body.theme-purple pre {
+  background: #0d0016;
+  border: 1px solid #bb44ff;
+  box-shadow: inset 0 0 14px #bb44ff;
+}
+
+body.theme-purple select {
+  background: #150020;
+  border: 2px solid #bb44ff;
+  color: #bb44ff;
+  box-shadow: 0 0 13px #bb44ff;
+}
