@@ -276,39 +276,5 @@ body.theme-purple select {
   box-shadow: 0 0 13px #bb44ff;
 }
 
-@media (max-width: 900px) {
-  .panel-container {
-    flex-direction: column;
-    gap: 20px;
-  }
 
-  .input-box {
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-  }
-
-  input {
-    width: 90%;
-  }
-
-  button {
-    width: 90%;
-  }
-
-  .theme-box {
-    width: 100%;
-    justify-content: center;
-    margin: 40px 0 25px 0;
-  }
-
-  .wrapper {
-    width: 95%;
-    padding-top: 20px;
-  }
-
-  pre {
-    font-size: 14px;
-  }
-}
 
